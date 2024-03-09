@@ -6,7 +6,16 @@ const CareerTimeline = () => {
     <ol className="relative border-l border-black">
         <li className="mb-10 ml-4">
             <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white bg-black"></div>
-            <time className="font-mono mb-1 text-sm  leading-none ">February 2023 - Present</time>
+            <time className="font-mono mb-1 text-sm  leading-none ">February 2024 - Present</time>
+            <h3 className="font-mono  text-lg font-bold">Contributor Data Analyst @ Quantium</h3>
+            <p className="indent-5">
+                I completed my graduate program and got promoted! I am now working in the Health vertical at Quantium, 
+                with a particular focus on supporting business development opportunities in the UK health and pharmaceutical industries. 
+            </p>
+        </li>
+        <li className="mb-10 ml-4">
+            <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white bg-black"></div>
+            <time className="font-mono mb-1 text-sm  leading-none ">February 2023 - February 2024</time>
             <h3 className="font-mono  text-lg font-bold">Graduate Data Analyst @ Quantium</h3>
             <p className="indent-5">
                 My time at Quantium exposed me to tons of cool technologies, like&nbsp;
