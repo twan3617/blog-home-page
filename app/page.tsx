@@ -1,7 +1,12 @@
+import Link from 'next/link'
+import ArticleCard from '@/components/ArticleCard'
 import Hero from '@/components/Hero'
 import Section from '@/components/Section'
+import { getFeaturedPosts } from '@/lib/posts'
 
 export default function HomePage() {
+  const featuredPosts = getFeaturedPosts().slice(0, 4)
+
   return (
     <main>
       <Hero />
@@ -12,7 +17,14 @@ export default function HomePage() {
         </p>
       </Section>
       <Section id="writing" eyebrow="Selected ideas" title="Writing">
-        <p className="readingWidth">Selected mathematical and computational writing will live here.</p>
+        <div className="articleGrid">
+          {featuredPosts.map((post) => (
+            <ArticleCard key={post.slug} post={post} />
+          ))}
+        </div>
+        <Link className="textLink" href="/writing">
+          View all writing <span aria-hidden="true">→</span>
+        </Link>
       </Section>
       <Section id="experience" eyebrow="Professional" title="Experience">
         <p className="readingWidth">A concise career timeline will live here.</p>

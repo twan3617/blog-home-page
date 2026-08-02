@@ -1,0 +1,59 @@
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--paper-raised) 68%, transparent);
+  box-shadow: 0 1rem 2.5rem rgb(20 39 45 / 0.05);
+}
+
+.date {
+  color: var(--teal-dark);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 1rem 0 0.8rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-weight: 540;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.card h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.card h3 a:hover {
+  color: var(--teal-dark);
+}
+
+.card p {
+  margin: 0 0 1.5rem;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topics li {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
