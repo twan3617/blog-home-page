@@ -1,0 +1,113 @@
+.hero {
+  display: grid;
+  min-height: min(50rem, calc(100svh - 4.25rem));
+  grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+  padding-block: clamp(4rem, 10vw, 8rem);
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  margin: 0 0 1.5rem;
+  color: var(--teal-dark);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.copy h1 {
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(4.25rem, 11vw, 8.75rem);
+  font-weight: 520;
+  letter-spacing: -0.065em;
+  line-height: 0.82;
+}
+
+.statement {
+  max-width: 38rem;
+  margin: 2rem 0 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.65rem, 3.4vw, 2.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.introduction {
+  max-width: 35rem;
+  margin: 1.5rem 0 0;
+  color: var(--ink-muted);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2.25rem;
+}
+
+.resume {
+  margin-left: 0.5rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-underline-offset: 0.25em;
+}
+
+.portraitFrame {
+  position: relative;
+  isolation: isolate;
+}
+
+.portraitFrame::before {
+  position: absolute;
+  z-index: -1;
+  inset: -1.4rem 1.6rem 1.4rem -1.6rem;
+  border: 1px solid var(--teal);
+  border-radius: 48% 48% 1.5rem 1.5rem;
+  content: '';
+}
+
+.portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: 48% 48% 1.25rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+  object-fit: cover;
+  object-position: center 28%;
+}
+
+@media (max-width: 48rem) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding-block: 4.5rem 6rem;
+  }
+
+  .copy h1 {
+    font-size: clamp(4rem, 23vw, 7rem);
+  }
+
+  .portraitFrame {
+    width: min(82vw, 31rem);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 30rem) {
+  .resume {
+    width: 100%;
+    margin: 0.35rem 0 0;
+  }
+}
