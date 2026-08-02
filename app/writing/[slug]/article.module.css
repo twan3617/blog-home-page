@@ -1,0 +1,134 @@
+.shell {
+  padding-block: clamp(4.5rem, 10vw, 8rem) var(--space-section);
+}
+
+.shell article {
+  max-width: var(--reading);
+  margin-inline: auto;
+}
+
+.header {
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.topics {
+  margin: 0 0 1rem;
+  color: var(--teal-dark);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 520;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+}
+
+.header time {
+  display: block;
+  margin-top: 1.5rem;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.prose {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  color: var(--ink);
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  line-height: 1.78;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin: 2.5em 0 0.7em;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 560;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.prose h1,
+.prose h2 {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+}
+
+.prose h3 {
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose pre,
+.prose table {
+  margin-block: 1.35em;
+}
+
+.prose a {
+  text-underline-offset: 0.2em;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--ochre-light);
+  color: var(--ink-muted);
+}
+
+.prose code {
+  padding: 0.12em 0.3em;
+  border-radius: 0.25rem;
+  background: rgb(20 39 45 / 0.07);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+
+.prose pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.prose img,
+.prose table,
+.prose :global(.katex-display) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.back {
+  display: inline-block;
+  font-weight: 750;
+  text-underline-offset: 0.25em;
+}

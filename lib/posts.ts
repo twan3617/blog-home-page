@@ -80,6 +80,18 @@ export function getPostSlugs(): string[] {
   return getAllPosts().map(({ slug }) => slug)
 }
 
+export function resolvePostSlug(value: string): string | undefined {
+  const slugs = getPostSlugs()
+  if (slugs.includes(value)) return value
+
+  try {
+    const decoded = decodeURIComponent(value)
+    return slugs.includes(decoded) ? decoded : undefined
+  } catch {
+    return undefined
+  }
+}
+
 export async function getPost(slug: string): Promise<Post> {
   const fileName = `${slug}.md`
   const source = fs.readFileSync(path.join(postsDirectory, fileName), 'utf8')
@@ -98,18 +110,4 @@ export async function getPost(slug: string): Promise<Post> {
     ...metadata(fileName, data),
     contentHtml: processed.toString(),
   }
-}
-
-// Temporary Pages Router compatibility. Removed when /posts/[id] migrates.
-export function getSortedPostsData() {
-  return getAllPosts().map(({ slug, ...post }) => ({ id: slug, ...post }))
-}
-
-export function getAllPostIds() {
-  return getPostSlugs().map((id) => ({ params: { id } }))
-}
-
-export async function getPostData(id: string) {
-  const post = await getPost(id)
-  return { id, ...post }
 }
