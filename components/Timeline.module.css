@@ -1,0 +1,134 @@
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 0.28fr) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+  padding: 0 0 3.25rem 1.5rem;
+}
+
+.entry::before {
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 2px solid var(--teal-dark);
+  border-radius: 50%;
+  background: var(--paper);
+  content: '';
+}
+
+.entry::after {
+  position: absolute;
+  top: 1.35rem;
+  bottom: 0.35rem;
+  left: 0.28rem;
+  width: 1px;
+  background: var(--rule);
+  content: '';
+}
+
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+.entry:last-child::after {
+  display: none;
+}
+
+.period {
+  grid-column: 1;
+  grid-row: 1 / span 5;
+  margin: 0;
+  color: var(--teal-dark);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.entry h3,
+.subtitle,
+.location,
+.summary,
+.highlights {
+  grid-column: 2;
+}
+
+.entry h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.45rem, 2.6vw, 1.9rem);
+  font-weight: 560;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.entry h3 a {
+  color: inherit;
+  text-underline-offset: 0.18em;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--ink);
+  font-weight: 750;
+}
+
+.location {
+  margin: 0.15rem 0 0;
+  color: var(--teal-dark);
+  font-size: 0.82rem;
+}
+
+.summary {
+  max-width: var(--reading);
+  margin: 0.85rem 0 0;
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 36rem) {
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .period,
+  .entry h3,
+  .subtitle,
+  .location,
+  .summary,
+  .highlights {
+    grid-column: 1;
+  }
+
+  .period {
+    grid-row: auto;
+    margin-bottom: 0.7rem;
+  }
+}

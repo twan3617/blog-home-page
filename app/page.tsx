@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import ArticleCard from '@/components/ArticleCard'
 import Hero from '@/components/Hero'
+import InterestList from '@/components/InterestList'
 import Section from '@/components/Section'
+import Timeline from '@/components/Timeline'
+import { profile } from '@/content/profile'
 import { getFeaturedPosts } from '@/lib/posts'
 
 export default function HomePage() {
@@ -11,10 +14,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <Section id="about" eyebrow="Currently" title="A curious life in numbers">
-        <p className="readingWidth">
-          I use mathematics and computation to understand complicated systems. This
-          is where I collect the ideas, projects, and questions that stay with me.
-        </p>
+        <InterestList items={profile.current} />
       </Section>
       <Section id="writing" eyebrow="Selected ideas" title="Writing">
         <div className="articleGrid">
@@ -27,13 +27,13 @@ export default function HomePage() {
         </Link>
       </Section>
       <Section id="experience" eyebrow="Professional" title="Experience">
-        <p className="readingWidth">A concise career timeline will live here.</p>
+        <Timeline entries={profile.experience} />
       </Section>
       <Section id="education" eyebrow="Foundations" title="Mathematics and education">
-        <p className="readingWidth">Research, theses, and education will live here.</p>
+        <Timeline entries={profile.education} />
       </Section>
       <Section id="beyond" eyebrow="Beyond the screen" title="The rest of life">
-        <p className="readingWidth">Books, volleyball, piano, and other interests will live here.</p>
+        <InterestList items={profile.interests} />
       </Section>
     </main>
   )
