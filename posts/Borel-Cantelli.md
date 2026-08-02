@@ -1,6 +1,9 @@
 ---
 title: "Infinitely Recurring Events occur with Probability Zero"
 date: "2022-03-14"
+description: "A concise proof and interpretation of the Borel-Cantelli lemma and its consequences for recurring events."
+topics: [Probability, Measure Theory]
+featured: true
 ---
 
 In this post, we give short proofs for the Borel-Cantelli lemma, which, succinctly stated, says that events which reoccur infinitely often in a sequence of events must have probability zero. One of its main consequences is that events unlikely to occur under one probability measure is unlikely in any probability measure "dominated" by it. We make all of these concepts precise.

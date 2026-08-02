@@ -1,76 +1,115 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import html from 'remark-html';
-import markdown from 'remark-parse';
-import math from 'remark-math';
-import htmlKatex from 'remark-html-katex';
-import unified from 'unified';
+import fs from 'node:fs'
+import path from 'node:path'
+import matter from 'gray-matter'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkMath from 'remark-math'
+import remarkRehype from 'remark-rehype'
+import rehypeRaw from 'rehype-raw'
+import rehypeKatex from 'rehype-katex'
+import rehypeStringify from 'rehype-stringify'
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getSortedPostsData() {
-  // Get file names under /posts
-  const fileNames = []
-  fs.readdirSync(postsDirectory).forEach(file => { if(file != ".DS_Store") { fileNames.push(file) }}); // Ignore .DS_Store files
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
+export type PostSummary = {
+  slug: string
+  title: string
+  date: string
+  description: string
+  topics: string[]
+  featured: boolean
+}
 
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+export type Post = PostSummary & {
+  contentHtml: string
+}
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
-    };
-  });
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
+function metadata(fileName: string, data: Record<string, unknown>): Omit<PostSummary, 'slug'> {
+  for (const field of ['title', 'description'] as const) {
+    if (typeof data[field] !== 'string' || data[field].trim() === '') {
+      throw new Error(`${fileName}: ${field} must be a non-empty string`)
     }
-  });
+  }
+
+  const date = data.date instanceof Date
+    ? data.date.toISOString().slice(0, 10)
+    : data.date
+  if (typeof date !== 'string' || Number.isNaN(Date.parse(date))) {
+    throw new Error(`${fileName}: date must be a valid date`)
+  }
+  if (!Array.isArray(data.topics) || data.topics.some((topic) => typeof topic !== 'string')) {
+    throw new Error(`${fileName}: topics must be an array of strings`)
+  }
+  if (typeof data.featured !== 'boolean') {
+    throw new Error(`${fileName}: featured must be a boolean`)
+  }
+
+  return {
+    title: data.title as string,
+    date,
+    description: data.description as string,
+    topics: data.topics,
+    featured: data.featured,
+  }
+}
+
+export function readPosts(directory = postsDirectory): PostSummary[] {
+  return fs
+    .readdirSync(directory)
+    .filter((fileName) => fileName.endsWith('.md'))
+    .map((fileName) => {
+      const source = fs.readFileSync(path.join(directory, fileName), 'utf8')
+      const { data } = matter(source)
+      return {
+        slug: fileName.replace(/\.md$/, ''),
+        ...metadata(fileName, data),
+      }
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+}
+
+export function getAllPosts(): PostSummary[] {
+  return readPosts()
+}
+
+export function getFeaturedPosts(): PostSummary[] {
+  return getAllPosts().filter((post) => post.featured)
+}
+
+export function getPostSlugs(): string[] {
+  return getAllPosts().map(({ slug }) => slug)
+}
+
+export async function getPost(slug: string): Promise<Post> {
+  const fileName = `${slug}.md`
+  const source = fs.readFileSync(path.join(postsDirectory, fileName), 'utf8')
+  const { data, content } = matter(source)
+  const processed = await unified()
+    .use(remarkParse)
+    .use(remarkMath)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeKatex)
+    .use(rehypeStringify)
+    .process(content)
+
+  return {
+    slug,
+    ...metadata(fileName, data),
+    contentHtml: processed.toString(),
+  }
+}
+
+// Temporary Pages Router compatibility. Removed when /posts/[id] migrates.
+export function getSortedPostsData() {
+  return getAllPosts().map(({ slug, ...post }) => ({ id: slug, ...post }))
 }
 
 export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+  return getPostSlugs().map((id) => ({ params: { id } }))
 }
 
 export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Use remark to convert markdown into HTML string
-  const processedContent = await unified()
-    .use(markdown)
-    .use(math)
-    .use(htmlKatex)
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
-  // Combine the data with the id and contentHtml
-  return {
-    id,
-    contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
-  };
+  const post = await getPost(id)
+  return { id, ...post }
 }

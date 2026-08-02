@@ -1,6 +1,9 @@
 ---
 title: "Common Distributions"
 date: "2022-03-09" 
+description: "A reference guide to common probability distributions, their moments, relationships, and derivations."
+topics: [Probability, Statistics, Reference]
+featured: false
 ---
 
 In this post, I will write about some of the key distributions that are used by statisticians. The aim is to not just have the formulas, but explain intuition, proofs and uses for these distributions. These will be added in as my time permits. I will mainly be using this page as a reference.
@@ -113,4 +116,3 @@ $$
 
 # Gamma Distribution
  -->
-

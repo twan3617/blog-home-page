@@ -1,6 +1,9 @@
 ---
 title:  "Bayesian Inference, and a basic Changepoint Detection Algorithm"
 date:   '2024-01-09'
+description: "An introduction to Bayesian reasoning through a practical changepoint-detection algorithm."
+topics: [Bayesian Statistics, Probability, Algorithms]
+featured: true
 ---
 
 

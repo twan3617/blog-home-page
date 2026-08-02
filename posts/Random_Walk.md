@@ -1,6 +1,9 @@
 ---
 title:  "Recurrence and Transience in Simple Random Walks (The Adventures of Drunk Ants, Men and Bees)"
 date:   '2022-04-01'
+description: "An intuitive and mathematical exploration of recurrence and transience in random walks across different dimensions."
+topics: [Probability, Stochastic Processes, Mathematics]
+featured: true
 ---
 Recently (March/April 2022), my stochastic processes class started discussing Markov processes and the concept of recurrence and transience. Some of the most well-known results in this area concern simple random walks on $\mathbb{Z}^d$ and their transience and recurrence properties depending on the dimensions $$d$$ (I have seen these referred to as Pòlya's Random Walk Theorems online). The results of these theorems admit some very intriguing, easily accessible analogies: "drunk ants and men will surely find their way home, but a drunk bird may get lost forever". In honour of how catchy this analogy is, I decided to write up a post with some definitions, proofs and silly pictures. Let's do it!
 
@@ -197,4 +200,3 @@ The proof is left as an exercise to the reader (we had to write this out as an a
 
 In the meantime, here is a bee: 
 ![drawing2](/images/random_walk3d.png)
-

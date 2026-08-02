@@ -1,6 +1,9 @@
 ---
 title:  "Anomaly Detection Project: Completion!"
 date:   '2022-03-10'
+description: "A research project using streaming data and contextual anomaly detection to identify structural changes in noisy sensor systems."
+topics: [Machine Learning, Time Series, Anomaly Detection]
+featured: false
 ---
 Recently, I had the pleasure of being part of the team that submitted our results and working prototypes for the "AI for Decision-Making" (Stage 1 Phase 2) project proposed by the [Defence Innovation Network](https://defenceinnovationnetwork.com/), a University-Defence lead iniative to provide funding for projects with relevance to Australian Defence. 
 

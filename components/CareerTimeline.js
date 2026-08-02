@@ -6,10 +6,18 @@ const CareerTimeline = () => {
     <ol className="relative border-l border-black">
         <li className="mb-10 ml-4">
             <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white bg-black"></div>
-            <time className="font-mono mb-1 text-sm  leading-none ">February 2024 - Present</time>
+            <time className="font-mono mb-1 text-sm leading-none">2025 - Present</time>
+            <h3 className="font-mono text-lg font-bold">Data Scientist @ Coolabah Capital Investments</h3>
+            <p className="indent-5">
+                I joined Coolabah&apos;s Data Science team in Sydney, where I spent my first year, and have since moved to the London office.
+            </p>
+        </li>
+        <li className="mb-10 ml-4">
+            <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white bg-black"></div>
+            <time className="font-mono mb-1 text-sm  leading-none ">February 2024 - 2025</time>
             <h3 className="font-mono  text-lg font-bold">Contributor Data Analyst @ Quantium</h3>
             <p className="indent-5">
-                I completed my graduate program and got promoted! I am now working in the Health vertical at Quantium, 
+                I completed my graduate program and was promoted, working in Quantium&apos;s Health vertical
                 with a particular focus on supporting business development opportunities in the UK health and pharmaceutical industries. 
             </p>
         </li>
