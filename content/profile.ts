@@ -65,23 +65,17 @@ export const profile = {
   ],
   experience: [
     {
-      period: '2025 — Present',
+      period: 'May 2024 — Present',
       title: 'Data Scientist',
       subtitle: 'Coolabah Capital Investments',
       location: 'London, United Kingdom',
-      summary: 'I joined Coolabah’s Data Science team in Sydney, spent my first year there, and have since moved to the London office.',
+      summary: 'Coolabah is a fixed-income asset manager. I joined the Data Science team in Sydney, spent my first year there, and am now one of two data scientists in London.',
     },
     {
-      period: 'February 2024 — 2025',
-      title: 'Contributor Data Analyst',
+      period: 'February 2023 — April 2024',
+      title: 'Data Analyst',
       subtitle: 'Quantium',
-      summary: 'After completing the graduate program, I worked in Quantium’s Health vertical on business-development opportunities in the UK health and pharmaceutical industries.',
-    },
-    {
-      period: 'February 2023 — February 2024',
-      title: 'Graduate Data Analyst',
-      subtitle: 'Quantium',
-      summary: 'I worked across product analytics and consulting, including transaction labelling, customer attribution, platform costing, and global insurance projects.',
+      summary: 'I joined through the graduate program and later became a Contributor Data Analyst, working across product analytics and consulting before moving into Quantium’s Health vertical to support UK health and pharmaceutical business development.',
       highlights: ['SQL', 'Snowflake', 'Spark', 'Python', 'Winner, Quantium 2023 GenAI Hackathon'],
     },
     {
@@ -102,15 +96,8 @@ export const profile = {
       period: '2021 — 2022',
       title: 'Master of Mathematics with Excellence',
       subtitle: 'UNSW',
-      summary: 'Average mark 93; thesis mark 96. Research on model-selection consistency for the Lasso and a root-log regulariser.',
+      summary: 'Research on model-selection consistency for the Lasso and a root-log regulariser.',
       href: '/assets/thesis/masters_thesis_tw.pdf',
-    },
-    {
-      period: '2016 — 2020',
-      title: 'BSc (Advanced), Honours in Pure Mathematics',
-      subtitle: 'University of Sydney',
-      summary: 'Average mark 92; thesis mark 95. Research on pseudomonotone operators and anisotropic elliptic equations.',
-      href: '/assets/thesis/honours_thesis_tw.pdf',
     },
     {
       period: '2018',
@@ -118,10 +105,17 @@ export const profile = {
       subtitle: 'University of California, Berkeley',
       summary: 'Studied partial differential equations, probability theory, real analysis, and discrete mathematics.',
     },
+    {
+      period: '2016 — 2020',
+      title: 'BSc (Advanced), Honours in Pure Mathematics',
+      subtitle: 'University of Sydney',
+      summary: 'Research on pseudomonotone operators and anisotropic elliptic equations.',
+      href: '/assets/thesis/honours_thesis_tw.pdf',
+    },
   ],
   interests: [
-    { title: 'Books', description: 'Reading widely and keeping a growing bookshelf.' },
-    { title: 'Volleyball', description: 'Playing whenever London weather and schedules permit.' },
-    { title: 'Piano', description: 'Returning happily to the same three pieces.' },
+    { title: 'Books', description: 'Crime, history, and culture.' },
+    { title: 'Travel', description: 'Exploring London and Europe’s rich history.' },
+    { title: 'Piano', description: 'Playing V.K’s “Pure White,” DJ Okawari’s “Flower Dance,” and “Melody of the Night.”' },
   ],
 } as const satisfies Profile

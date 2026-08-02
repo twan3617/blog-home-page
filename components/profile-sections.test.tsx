@@ -1,27 +1,42 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { profile } from '@/content/profile'
+import type { InterestGroup, TimelineEntry } from '@/content/profile'
 import InterestList from './InterestList'
 import Timeline from './Timeline'
 
 describe('profile sections', () => {
   it('renders ordered experience and linked education', () => {
-    const experience = renderToStaticMarkup(<Timeline entries={profile.experience} />)
-    const education = renderToStaticMarkup(<Timeline entries={profile.education} />)
+    const entries: readonly TimelineEntry[] = [
+      {
+        period: 'Later',
+        title: 'Linked entry',
+        subtitle: 'Organisation',
+        summary: 'A linked timeline entry.',
+        href: '/document.pdf',
+      },
+      {
+        period: 'Earlier',
+        title: 'Earlier entry',
+        subtitle: 'Organisation',
+        summary: 'An earlier timeline entry.',
+      },
+    ]
+    const timeline = renderToStaticMarkup(<Timeline entries={entries} />)
 
-    expect(experience).toContain('<ol')
-    expect(experience.indexOf('Coolabah')).toBeLessThan(experience.indexOf('Quantium'))
-    expect(experience).toContain('2025 — Present')
-    expect(education).toContain('/assets/thesis/masters_thesis_tw.pdf')
+    expect(timeline).toContain('<ol')
+    expect(timeline.indexOf('Linked entry')).toBeLessThan(timeline.indexOf('Earlier entry'))
+    expect(timeline).toContain('/document.pdf')
   })
 
   it('renders current and personal interests as accessible lists', () => {
-    const current = renderToStaticMarkup(<InterestList items={profile.current} />)
-    const interests = renderToStaticMarkup(<InterestList items={profile.interests} />)
+    const items: readonly InterestGroup[] = [
+      { title: 'An interest', description: 'A short description.' },
+    ]
+    const interests = renderToStaticMarkup(<InterestList items={items} />)
 
-    expect(current).toContain('<ul')
-    expect(current).toContain('role="list"')
-    expect(current).toContain('Coolabah Capital Investments')
-    expect(interests).toContain('Volleyball')
+    expect(interests).toContain('<ul')
+    expect(interests).toContain('role="list"')
+    expect(interests).toContain('An interest')
+    expect(interests).toContain('A short description.')
   })
 })
