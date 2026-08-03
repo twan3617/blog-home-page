@@ -29,6 +29,7 @@
   font-weight: 520;
   letter-spacing: -0.05em;
   line-height: 0.98;
+  overflow-wrap: anywhere;
 }
 
 .header time {
@@ -77,6 +78,7 @@
 
 .prose a {
   text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
 }
 
 .prose blockquote {
@@ -113,6 +115,12 @@
 .prose :global(.katex-display) {
   max-width: 100%;
   overflow-x: auto;
+}
+
+.prose img {
+  height: auto;
+  margin-inline: auto;
+  border-radius: var(--radius);
 }
 
 .prose table {

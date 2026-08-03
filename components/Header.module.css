@@ -30,6 +30,13 @@
   text-decoration: none;
 }
 
+.name:hover {
+  border-color: var(--teal-dark);
+  color: var(--paper-raised);
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+}
+
 .navigation {
   display: flex;
   align-items: center;
@@ -47,13 +54,15 @@
   font-size: 0.8rem;
   font-weight: 650;
   letter-spacing: 0.04em;
-  text-decoration: none;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.35em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .navigation a:hover {
   color: var(--teal-dark);
+  text-decoration-color: var(--ochre);
 }
 
 @media (max-width: 40rem) {

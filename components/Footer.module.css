@@ -52,6 +52,11 @@
   text-underline-offset: 0.3em;
 }
 
+.email:hover,
+.links a:hover {
+  color: var(--ochre-light);
+}
+
 .note {
   grid-column: 1 / -1;
   margin: 2rem 0 0;

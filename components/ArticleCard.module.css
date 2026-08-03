@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   display: flex;
   min-width: 0;
   flex-direction: column;
@@ -7,6 +8,14 @@
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--paper-raised) 68%, transparent);
   box-shadow: 0 1rem 2.5rem rgb(20 39 45 / 0.05);
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.card:focus-within {
+  border-color: var(--teal);
 }
 
 .date {
@@ -36,6 +45,12 @@
   color: var(--teal-dark);
 }
 
+.card h3 a::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
 .card p {
   margin: 0 0 1.5rem;
 }
@@ -56,4 +71,12 @@
   color: var(--ink-muted);
   font-size: 0.72rem;
   line-height: 1.35;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    border-color: color-mix(in srgb, var(--teal) 65%, var(--rule));
+    box-shadow: 0 1.4rem 3rem rgb(20 39 45 / 0.1);
+    transform: translateY(-4px);
+  }
 }

@@ -17,6 +17,7 @@
   --space-section: clamp(5rem, 11vw, 9rem);
   --duration-fast: 160ms;
   --duration-slow: 600ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --shadow-soft: 0 2rem 5rem rgb(20 39 45 / 0.14);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
@@ -36,11 +37,7 @@ body {
   min-width: 20rem;
   margin: 0;
   color: var(--ink);
-  background:
-    linear-gradient(rgb(57 119 122 / 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(57 119 122 / 0.035) 1px, transparent 1px),
-    var(--paper);
-  background-size: 4rem 4rem;
+  background: var(--paper);
   font-family: var(--font-sans), Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
@@ -103,7 +100,7 @@ img {
 
 .articleGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
   gap: 1rem;
 }
 
@@ -173,6 +170,10 @@ img {
   transform: translateY(-2px);
 }
 
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .buttonSecondary {
   border-color: var(--rule);
   color: var(--ink);
@@ -185,6 +186,21 @@ img {
   transform: translateY(-2px);
 }
 
+@keyframes section-reveal {
+  from {
+    opacity: 0.35;
+    transform: translateY(2rem);
+  }
+}
+
+@supports (animation-timeline: view()) and (animation-range: entry 10% cover 30%) {
+  .reveal {
+    animation: section-reveal var(--duration-slow) var(--ease-out) both;
+    animation-range: entry 10% cover 30%;
+    animation-timeline: view();
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -193,14 +209,7 @@ img {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-@media (max-width: 44rem) {
-  .articleGrid {
-    grid-template-columns: 1fr;
   }
 }

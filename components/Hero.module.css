@@ -1,10 +1,25 @@
 .hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
   min-height: min(50rem, calc(100svh - 4.25rem));
   grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
   align-items: center;
   gap: clamp(3rem, 8vw, 8rem);
   padding-block: clamp(4rem, 10vw, 8rem);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background:
+    radial-gradient(circle at 78% 34%, rgb(227 180 119 / 0.18), transparent 27rem),
+    linear-gradient(rgb(57 119 122 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(57 119 122 / 0.045) 1px, transparent 1px);
+  background-size: auto, 4rem 4rem, 4rem 4rem;
+  content: '';
+  pointer-events: none;
 }
 
 .copy {
@@ -85,6 +100,46 @@
   box-shadow: var(--shadow-soft);
   object-fit: cover;
   object-position: center 28%;
+}
+
+@keyframes hero-copy-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+@keyframes portrait-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .copy > * {
+    animation: hero-copy-reveal 700ms var(--ease-out) both;
+  }
+
+  .copy > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .copy > :nth-child(3) {
+    animation-delay: 150ms;
+  }
+
+  .copy > :nth-child(4) {
+    animation-delay: 220ms;
+  }
+
+  .copy > :nth-child(5) {
+    animation-delay: 290ms;
+  }
+
+  .portraitFrame {
+    animation: portrait-reveal 850ms 180ms var(--ease-out) both;
+  }
 }
 
 @media (max-width: 48rem) {

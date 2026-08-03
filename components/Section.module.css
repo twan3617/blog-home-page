@@ -8,6 +8,8 @@
 }
 
 .heading {
+  position: sticky;
+  top: 6.5rem;
   align-self: start;
 }
 
@@ -40,5 +42,9 @@
   .section {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .heading {
+    position: static;
   }
 }

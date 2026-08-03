@@ -113,6 +113,21 @@
   line-height: 1.35;
 }
 
+@keyframes timeline-line-reveal {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@supports (animation-timeline: view()) and (animation-range: entry 5% cover 45%) {
+  .entry::after {
+    transform-origin: top;
+    animation: timeline-line-reveal linear both;
+    animation-range: entry 5% cover 45%;
+    animation-timeline: view();
+  }
+}
+
 @media (max-width: 36rem) {
   .entry {
     grid-template-columns: 1fr;

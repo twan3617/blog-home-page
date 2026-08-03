@@ -10,6 +10,9 @@
 .list li {
   padding-top: 1rem;
   border-top: 2px solid var(--ochre-light);
+  transition:
+    border-color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
 }
 
 .list h3 {
@@ -23,6 +26,13 @@
 
 .list p {
   margin: 0.65rem 0 0;
+}
+
+@media (hover: hover) {
+  .list li:hover {
+    border-color: var(--ochre);
+    transform: translateY(-3px);
+  }
 }
 
 @media (max-width: 58rem) {
