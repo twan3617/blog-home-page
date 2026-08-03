@@ -8,16 +8,5 @@ export default defineConfig([
   globalIgnores([
     '.next/**',
     'coverage/**',
-    'components/AboutMe.js',
-    'components/BlogSection.tsx',
-    'components/CareerTimeline.js',
-    'components/CombinedPanel.js',
-    'components/CombinedTopPanel.tsx',
-    'components/ConnectPanel.tsx',
-    'components/EducationTimeline.js',
-    'components/Footer.js',
-    'components/layout.tsx',
-    'global.d.ts',
-    'pages/**',
   ]),
 ])
