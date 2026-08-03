@@ -1,10 +1,30 @@
 import type { Metadata } from 'next'
 import ArticleCard from '@/components/ArticleCard'
 import { getAllPosts } from '@/lib/posts'
+import { site } from '@/lib/site'
+
+const description =
+  'Notes on mathematics, probability, computation, and machine learning.'
 
 export const metadata: Metadata = {
-  title: 'Writing | Tony Wang',
-  description: 'Notes on mathematics, probability, computation, and machine learning.',
+  title: 'Writing',
+  description,
+  alternates: { canonical: '/writing' },
+  openGraph: {
+    title: 'Writing | Tony Wang',
+    description,
+    url: '/writing',
+    siteName: site.name,
+    locale: site.locale,
+    images: [site.socialImage],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Writing | Tony Wang',
+    description,
+    images: [site.socialImage.url],
+  },
 }
 
 export default function WritingPage() {

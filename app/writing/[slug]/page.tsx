@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPost, getPostSlugs, resolvePostSlug } from '@/lib/posts'
+import { site } from '@/lib/site'
 import styles from './article.module.css'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -31,6 +32,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: `/writing/${encodeURIComponent(slug)}`,
+      siteName: site.name,
+      locale: site.locale,
+      images: [site.socialImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [site.socialImage.url],
     },
   }
 }

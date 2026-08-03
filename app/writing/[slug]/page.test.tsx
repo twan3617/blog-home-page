@@ -10,6 +10,25 @@ describe('article route', () => {
 
     expect(generateStaticParams()).toContainEqual({ slug: 'Borel-Cantelli' })
     expect(metadata.title).toBe('Infinitely Recurring Events occur with Probability Zero')
+    expect(metadata).toMatchObject({
+      alternates: { canonical: '/writing/Borel-Cantelli' },
+      openGraph: {
+        type: 'article',
+        siteName: 'Tony Wang',
+        locale: 'en_GB',
+        images: [
+          {
+            url: '/opengraph-image',
+            width: 1200,
+            height: 630,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        images: ['/opengraph-image'],
+      },
+    })
     expect(html).toContain('<article')
     expect(html).toContain('<h1')
     expect(html).toContain('class="katex"')
