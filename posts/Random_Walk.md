@@ -1,5 +1,5 @@
 ---
-title:  "Recurrence and Transience in Simple Random Walks (The Adventures of Drunk Ants, Men and Bees)"
+title:  "Recurrence and Transience in Simple Random Walks"
 date:   '2022-04-01'
 description: "An intuitive and mathematical exploration of recurrence and transience in random walks across different dimensions."
 topics: [Probability, Stochastic Processes, Mathematics]

@@ -3,7 +3,7 @@ title:  "Automatic Feature Extraction: An Introduction to Deep 1D Convolution Ne
 date:   '2022-03-09'
 description: "How one-dimensional convolutional networks learn useful features directly from noisy time-series data."
 topics: [Machine Learning, Time Series, Neural Networks]
-featured: true
+featured: false
 ---
 
 # Context 
@@ -66,5 +66,4 @@ See [here](https://www.research-collection.ethz.ch/handle/20.500.11850/415151) f
 # Implementation
 
 Please see [my GitHub repository here](https://github.com/twan3617/1D_conv_net_Analysis) for the notebooks and code. 
-
 

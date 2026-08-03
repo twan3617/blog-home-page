@@ -8,7 +8,7 @@ import { profile } from '@/content/profile'
 import { getFeaturedPosts } from '@/lib/posts'
 
 export default function HomePage() {
-  const featuredPosts = getFeaturedPosts().slice(0, 4)
+  const featuredPosts = getFeaturedPosts().slice(0, 3)
 
   return (
     <main>
