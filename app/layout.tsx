@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Fraunces, Inter } from 'next/font/google'
+import Analytics from '@/components/Analytics'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { site } from '@/lib/site'
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   )

@@ -49,7 +49,7 @@ Markdown or typed profile data
   → statically generated HTML
 ```
 
-Most components are Server Components. The site currently needs no application-level Client Components because navigation, content rendering, responsive layout, and progressive animation are handled by HTML and CSS. This keeps the browser JavaScript footprint small.
+Most components are Server Components. The optional analytics component runs in the browser to track page changes; content rendering, responsive layout, and progressive animation are handled by HTML and CSS. This keeps the browser JavaScript footprint small.
 
 Global design tokens and shared layout utilities live in `app/globals.css`. Component-specific styles use CSS Modules, keeping selectors local to the component that imports them.
 
@@ -89,3 +89,17 @@ Next.js metadata exports generate page titles, descriptions, canonical URLs, and
 ## Deployment
 
 The production site is hosted on Netlify. Configure the deployment to use Node `24.18.1`, install with `npm ci`, and build with `npm run build`. Next.js and Netlify handle the statically generated pages and compatibility redirects from the committed App Router source.
+
+## Visit analytics
+
+The site supports [GoatCounter](https://www.goatcounter.com/) for visits per page and blog post. Tracking stays disabled when its environment variable is unset.
+
+1. Create a GoatCounter site and copy the `data-goatcounter` URL from its tracking snippet.
+2. In Netlify's project environment variables, add `NEXT_PUBLIC_GOATCOUNTER_URL` with that full URL, for example `https://YOUR_CODE.goatcounter.com/count`. Make it available to **Builds** and set its value for the **Production** deploy context only, leaving previews unset.
+3. Trigger a new production build and deploy. Next.js embeds `NEXT_PUBLIC_` values at build time, so changing this variable always requires a rebuild. The URL is public configuration, not an API key.
+
+The shared layout loads the script once and counts the initial page plus subsequent Next.js page changes. These are visits, not proof that someone finished reading an article. GoatCounter starts collecting after you enable it; it does not recover earlier visits.
+
+To [exclude your own browser](https://www.goatcounter.com/help/skip-dev), load `https://maths-stats-and-everything-else.netlify.app/#toggle-goatcounter` and confirm the alert says tracking is disabled. Reload if needed, then remove the fragment from the URL. Repeat in each browser/device you use; opening that special URL again toggles tracking back on. Localhost visits are ignored automatically.
+
+To check the integration after deployment, use a browser without the exclusion or an analytics blocker. Open the homepage, click through to Writing and a post, and check the browser Network panel for one request to your GoatCounter `/count` endpoint per page, with the visited path in the `p` query parameter. The script should load once, and navigation should still work if you block `gc.zgo.at`.
