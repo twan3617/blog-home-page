@@ -88,15 +88,17 @@ Next.js metadata exports generate page titles, descriptions, canonical URLs, and
 
 ## Deployment
 
-The production site is hosted on Netlify. Configure the deployment to use Node `24.18.1`, install with `npm ci`, and build with `npm run build`. Next.js and Netlify handle the statically generated pages and compatibility redirects from the committed App Router source.
+The production site is hosted on Netlify. `netlify.toml` sets the build command to `npm run build` and the publish directory to `.next`; `.nvmrc` records Node `24.18.1`. Next.js and Netlify handle the statically generated pages and compatibility redirects from the committed App Router source.
 
 ## Visit analytics
 
 The site supports [GoatCounter](https://www.goatcounter.com/) for visits per page and blog post. Tracking stays disabled when its environment variable is unset.
 
 1. Create a GoatCounter site and copy the `data-goatcounter` URL from its tracking snippet.
-2. In Netlify's project environment variables, add `NEXT_PUBLIC_GOATCOUNTER_URL` with that full URL, for example `https://YOUR_CODE.goatcounter.com/count`. Make it available to **Builds** and set its value for the **Production** deploy context only, leaving previews unset.
+2. In Netlify's project environment variables, add `NEXT_PUBLIC_GOATCOUNTER_URL` with that full URL, for example `https://YOUR_CODE.goatcounter.com/count`. Leave **Contains secret values** unchecked. Make it available to **Builds** and set its value for the **Production** deploy context only, leaving previews unset.
 3. Trigger a new production build and deploy. Next.js embeds `NEXT_PUBLIC_` values at build time, so changing this variable always requires a rebuild. The URL is public configuration, not an API key.
+
+`netlify.toml` excludes this public URL from Netlify's secret scanning, including if the variable was previously marked as secret. Other variables remain subject to scanning.
 
 The shared layout loads the script once and counts the initial page plus subsequent Next.js page changes. These are visits, not proof that someone finished reading an article. GoatCounter starts collecting after you enable it; it does not recover earlier visits.
 
