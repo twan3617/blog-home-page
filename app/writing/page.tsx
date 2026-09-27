@@ -36,8 +36,8 @@ export default function WritingPage() {
         <p className="archiveEyebrow">Notebook</p>
         <h1>Writing</h1>
         <p>
-          Explorations in mathematics, probability, computation, and machine
-          learning—written to make the ideas clearer by working through them.
+          Selected notes from earlier studies and projects in mathematics,
+          probability, computation, and machine learning.
         </p>
       </header>
       <h2 className="visuallyHidden">Article archive</h2>

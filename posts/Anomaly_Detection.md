@@ -13,19 +13,23 @@ You can find our work, with demonstrations, in our [repository](https://github.c
 
 <br>
 
-In the future, I will write up my learnings from this project and on anomaly detection as a whole, to both remember and showcase the work we had done and how it might be applied and extended. Stay tuned!
+The figures below show how responses from individual sensors can be combined into a steadier signal for anomalous transitions.
 
 <br>
 
-# Images
-Some cool images from our work! 
+## Figures
 
-![TOP_PHOTO](/images/CAC_responses.jpg)
-Figure 1: With the appropriate data transformations, we can convert incoming time series signals from a sensor array into an anomaly predictor, with each sensor producing each one of these curves. The peaks of the curves correspond to likely anomalous transitions.
+<figure>
+  <img src="/images/CAC_responses.jpg" alt="Anomaly response curves from individual sensors, with peaks marking possible transitions">
+  <figcaption>Each sensor produces an anomaly-response curve; peaks suggest transitions.</figcaption>
+</figure>
 
-![TOP_PHOTO](/images/combined_CAC_24.jpg)
+<figure>
+  <img src="/images/combined_CAC_24.jpg" alt="Combined anomaly scores from 24 sensors over a noisy signal">
+  <figcaption>Averaging responses from 24 sensors gives a smoother predictor despite noise.</figcaption>
+</figure>
 
-Figure 2: By leveraging multiple sources of data (in our experiments, 24 sensors worth of data), we can use data averaging techniques to combine the information effectively and obtain a smooth anomaly predictor that is robust against noise.
-
-![TOP_PHOTO](/images/smoothed_CAC_anim.gif)
-Figure 3: We generalised our methods to work in real time by transforming sensor data in batches as it arrives. Peaks correspond to detected anomalies. Red lines correspond to the theoretical positions where an anomalous transition has taken place.
+<figure>
+  <img src="/images/smoothed_CAC_anim.gif" alt="Animated smoothed anomaly score updating as sensor data arrives">
+  <figcaption>The score updates as data arrives; red lines mark known transition positions.</figcaption>
+</figure>

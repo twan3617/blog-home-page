@@ -7,6 +7,10 @@
   scroll-margin-top: 5.5rem;
 }
 
+.section[id='about'] {
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+
 .heading {
   position: sticky;
   top: 6.5rem;

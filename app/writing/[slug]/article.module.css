@@ -123,6 +123,19 @@
   border-radius: var(--radius);
 }
 
+.prose figure {
+  margin: 2.5rem 0;
+}
+
+.prose figcaption {
+  max-width: 60ch;
+  margin: 0.75rem auto 0;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;

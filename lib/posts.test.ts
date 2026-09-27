@@ -1,8 +1,8 @@
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { getPost, readPosts } from './posts'
+import { getPost, getPostSlugs, readPosts } from './posts'
 
 describe('readPosts', () => {
   const directories: string[] = []
@@ -57,5 +57,34 @@ describe('getPost', () => {
 
     expect(post.contentHtml).toContain('class="katex"')
     expect(post.contentHtml).toContain('<br>')
+  })
+
+  it('renders every article without KaTeX warnings or errors', async () => {
+    const warnings: string[] = []
+    const warn = vi.spyOn(console, 'warn').mockImplementation((message) => {
+      warnings.push(String(message))
+    })
+
+    try {
+      for (const slug of getPostSlugs()) {
+        const post = await getPost(slug)
+        expect(post.contentHtml).not.toContain('katex-error')
+      }
+    } finally {
+      warn.mockRestore()
+    }
+
+    expect(warnings).toEqual([])
+  })
+
+  it('keeps article headings below the page title and describes every figure', async () => {
+    for (const slug of getPostSlugs()) {
+      const { contentHtml } = await getPost(slug)
+      expect(contentHtml).not.toMatch(/<h1\b/)
+      for (const [, alt] of contentHtml.matchAll(/<img\b[^>]*alt="([^"]*)"/g)) {
+        expect(alt).not.toMatch(/^(?:TOP_PHOTO|drawing\d+|diagnostics charts)$/i)
+        expect(alt.length).toBeGreaterThan(10)
+      }
+    }
   })
 })

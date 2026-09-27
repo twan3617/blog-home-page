@@ -21,7 +21,7 @@ For example, the simple random walk with $$d = 1$$ starting at $$0$$ is a sequen
 
 <br> 
 
-_Definition 2._ _A simple random walk on_ $\mathbb{Z}^d$ _is said to be recurrent if, for any state _ $x \in \mathbb{Z}^d$_, the probability that the walk will return to _$x$_ in finite time is equal to _$1$_. Otherwise, it is said to be transient_.
+_Definition 2._ A simple random walk on $\mathbb{Z}^d$ is recurrent if, for every state $x \in \mathbb{Z}^d$, the probability of returning to $x$ at a positive time, conditional on starting at $x$, is $1$. Otherwise, it is transient.
 
 <br>
 
@@ -31,19 +31,19 @@ $$
 N_x = \sum_{n=1}^\infty 1_{X_n}(x),
 $$
 
-which represents the number of times the random walk returns to $$x$$. In this notation, the recurrence property can be written as the fact that there exists some state $$x$$ such that
+which counts visits to $$x$$ after time zero. In this notation, recurrence means that, for every state $$x$$,
 
 $$
-P(N_x \geq 1) = 1
+P(N_x \geq 1 \mid X_0 = x) = 1.
 $$
 
 The _expected number of returns_ is given by the expectation 
 
 $$
-\mathbb{E}N_x = \sum_{n=1}^\infty P(X_n = x)
+\mathbb{E}[N_x \mid X_0 = x] = \sum_{n=1}^\infty P(X_n = x \mid X_0 = x).
 $$
 
-We invoke Fubini's theorem to justify the interchange of the infinite sum and expectation. It can be shown that the expected number of returns $\mathbb{E}N_x$ characterises recurrence in random walks (indeed, for Markov chains in general), with the following result:
+Tonelli's theorem justifies the interchange of the nonnegative sum and expectation. The expected number of returns characterises recurrence in simple random walks:
 
 <br> 
 
@@ -51,7 +51,7 @@ _Proposition 1
 For simple random walks, we have the equivalence_
 
 $$
- \mathbb{E}N_x = \infty \text{ for any } x \in \mathbb{Z}^d \iff (X_n)_{n \in T} \text{ is recurrent.}
+ \mathbb{E}[N_x \mid X_0=x] = \infty \text{ for every } x \in \mathbb{Z}^d \iff (X_n)_{n \in T} \text{ is recurrent.}
 $$
 
 
@@ -59,27 +59,30 @@ _Proof_:
 Firstly, by the tail sum formula we can write the expected number of returns to $$x$$ as the sum over the probabilities
 
 $$
-\mathbb{E}N_x = \sum_{n \geq 1} P(N_x \geq n)
+\mathbb{E}[N_x \mid X_0=x] = \sum_{n \geq 1} P(N_x \geq n \mid X_0=x).
 $$  
 
-where $$P(N_x \geq n)$$ denotes the probability that the number of returns to $$x$$ is greater than $$n$$. 
+Here $$P(N_x \geq n \mid X_0=x)$$ is the probability of at least $$n$$ returns, starting from $$x$$.
 
 <br>
 
-Write $$T_{x,n}$$ as the random variable denoting the duration of the $$n$$th "excursion" from $$x$$ (that is, after returning to $$x$$ $$n-1$$ times, how long does it take the walk to return to $$x$$ next?). Then each $$T_{x,n}$$ is independent of each other and follows the same distribution for all $$n$$. The probability that the number of returns to $$x$$ being greater than $$n$$ is given by 
+Write $$T_{x,n}$$ as the random variable denoting the duration of the $$n$$th "excursion" from $$x$$ (that is, after returning to $$x$$ $$n-1$$ times, how long does it take the walk to return to $$x$$ next?). Then each $$T_{x,n}$$ is independent of each other and follows the same distribution for all $$n$$. The probability of at least $$n$$ returns to $$x$$ is
 
-$$P(N_x \geq n \mid X_0 = 0)  \\
-= P(T_{x,1} < \infty, P_{x,2}< \infty , \dots, T_{x,n} < \infty \mid X_0 = 0) \\
-= P(T_{x,1} < \infty \mid X_0 = x)^n,
+$$
+\begin{aligned}
+P(N_x \geq n \mid X_0 = x)
+&= P(T_{x,1} < \infty, T_{x,2} < \infty, \dots, T_{x,n} < \infty \mid X_0 = x) \\
+&= P(T_{x,1} < \infty \mid X_0 = x)^n.
+\end{aligned}
 $$
 
 and so by the tail sum formula, we have
 
 $$
-\mathbb{E}(N_x \mid X_0 = x) = \sum_{q \geq 1} P(T_{x,1} < \infty \mid X_0=x)^q.
+\mathbb{E}[N_x \mid X_0 = x] = \sum_{q \geq 1} P(T_{x,1} < \infty \mid X_0=x)^q.
 $$
 
-Of course, if $$(X_n)_{n \in T}$$ is recurrent, then $$P(T_{x,1} < \infty \mid X_0 = x>) = 1$$, and so $$\mathbb{E}(N_x \mid X_0 = x) = \infty$$. Conversely, if the walk is not recurrent, then $P(T_{x,1} < \infty \mid X_0 = x) < 1$, and the sum in the formula above is just a convergent geometric series, which is finite. This finishes the proof. 
+Of course, if $$(X_n)_{n \in T}$$ is recurrent, then $$P(T_{x,1} < \infty \mid X_0 = x) = 1$$, and so $$\mathbb{E}[N_x \mid X_0 = x] = \infty$$. Conversely, if the walk is not recurrent, then $P(T_{x,1} < \infty \mid X_0 = x) < 1$, and the sum in the formula above is just a convergent geometric series, which is finite. This finishes the proof.
 
 With this in hand, we turn to proving our main results of the day, for which we will need Stirling's approximation:
 
@@ -100,46 +103,50 @@ _Theorem 1 (Drunk Ants and Men): The simple random walk on _$\mathbb{Z}^d$_ for 
 <br>
 
 Here are two very relevant drawings before the proof:
-![drawing1](/images/random_walk1d.png)
 
-A drunk ant finds his way home...
+<figure>
+  <img src="/images/random_walk1d.png" alt="An ant tracing a winding path back home on a number line">
+  <figcaption>A one-dimensional walk can return to its starting point.</figcaption>
+</figure>
 
-![drawing2](/images/random_walk2d.png)
+<figure>
+  <img src="/images/random_walk2d.png" alt="A person wandering toward home on a two-dimensional grid">
+  <figcaption>A two-dimensional walk can also find its way home.</figcaption>
+</figure>
 
-...and so too do does the drunk man (possibly taking a while longer than the ant).
-
-<br>
-
-_Proof_: We note that the simple random walk is symmetric in the sense that any state is equivalent to any other state, so we fix $$x = 0$$ and show that $$x = 0$$ is recurrent (the proof will then work for any arbitrary state; indeed, it can be shown that any state being recurrent implies all states are recurrent for _irreducible_ Markov chains, but we do not go into this). We prove the results separately for $$d = 1$$ and $$d = 2$$. Both involve exactly the same idea: do some counting, compute $$\mathbb{E}N_x$$ (or, at least, show it must converge) and sprinkle in Stirling's formula liberally.
+_Proof_: We note that the simple random walk is symmetric in the sense that any state is equivalent to any other state, so we fix $$x = 0$$ and show that $$x = 0$$ is recurrent (the proof will then work for any arbitrary state; indeed, it can be shown that any state being recurrent implies all states are recurrent for _irreducible_ Markov chains, but we do not go into this). We prove the results separately for $$d = 1$$ and $$d = 2$$. Both involve the same idea: count return paths and use Stirling's formula to show the expected number of returns diverges.
 
 <br> 
 
-For both cases, the random walks are _periodic with period 2_ in the sense that making a return trip starting and ending at any given state only has positive probability for even steps: that is, $$p_{x,x}^{(2n)} > 0$$, where $$p_{x,x}^{(2n)}$$ denotes the probability of starting then returning to $$x$$ after exactly $$2n$$ time-steps. Hence, to find $$\mathbb{E}N_0 = \sum_{n=1}^\infty P(X_{2n} = 0) = \sum_{n=1}^\infty p_{0,0}^{(2n)}$$, we simply need to compute $$p_{0,0}^{(2n)}$$.
+For both cases, the random walks are _periodic with period 2_ in the sense that making a return trip starting and ending at any given state only has positive probability for even steps: that is, $$p_{x,x}^{(2n)} > 0$$, where $$p_{x,x}^{(2n)}$$ denotes the probability of starting then returning to $$x$$ after exactly $$2n$$ time-steps. Hence, to find $$\mathbb{E}[N_0 \mid X_0=0] = \sum_{n=1}^\infty P(X_{2n} = 0 \mid X_0=0) = \sum_{n=1}^\infty p_{0,0}^{(2n)}$$, we simply need to compute $$p_{0,0}^{(2n)}$$.
 
 <br>
 
 $$d=1$$: 
 In order to return to $$0$$ after $$2n$$ steps, we need to take exactly $$n$$ steps forward and $$n$$ steps back. There are $$\binom{2n}{n}$$ ways of doing this, with $$2^{2n}$$ total possible paths (since at each time-step, there are $$2$$ possible choices). This gives us 
 
-$$ p_{0,0}^{(2n)} = \binom{2n}{n} \frac{1}{2^{2n}} \\
-= \frac{1}{2^{2n}} \frac{(2n)!}{(n!)^2}.
+$$
+\begin{aligned}
+p_{0,0}^{(2n)} &= \binom{2n}{n} \frac{1}{2^{2n}} \\
+&= \frac{1}{2^{2n}} \frac{(2n)!}{(n!)^2}.
+\end{aligned}
 $$
 
 Using Stirling's formula to approximate each factorial, we then have 
 
-$$ \frac{(2n)!}{(n!)^2} = \frac{\sqrt{4n\pi}\left(\frac{2n}{e}\right)^{2n}}{2n\pi \left(\frac{n}{e}\right)^{2n}} \\
-= \frac{2^{2n}}{\sqrt{n \pi}},
+$$
+\frac{(2n)!}{(n!)^2} \approx \frac{\sqrt{4n\pi}\left(\frac{2n}{e}\right)^{2n}}{2n\pi \left(\frac{n}{e}\right)^{2n}} = \frac{2^{2n}}{\sqrt{n \pi}},
 $$
 
 and so 
 
 $$
-p_{0,0}^{(2n)} = \frac{1}{2^{2n}} \frac{2^{2n}}{\sqrt{n \pi}} = \frac{1}{\sqrt{n \pi}}.
+p_{0,0}^{(2n)} \approx \frac{1}{\sqrt{n \pi}}.
 $$
 
 Then 
 
-$$ \mathbb{E}N_x = \sum_{n=1}^\infty p_{0,0}^{(2n)} = \sum_{n=1}^\infty\frac{1}{\sqrt{n \pi}} = \infty,
+$$ \mathbb{E}[N_0 \mid X_0=0] = \sum_{n=1}^\infty p_{0,0}^{(2n)} = \infty,
 $$
 
 and so the $$d = 1$$ simple walk is recurrent, as we wanted to show.
@@ -161,8 +168,11 @@ $$
 We can simplify the right-hand side as follows: 
 
 $$
-\frac{1}{4^{2n}} \sum_{k=0}^n  \frac{(2n)!}{(k!)^2 ((n-k)!)^2} = \frac{1}{4^{2n}} \sum_{n=1}^\infty  \frac{(2n)! (n!)^2}{(n!)^2(k!)^2 ((n-k)!)^2} \\
-= \frac{1}{4^{2n}} \binom{2n}{n} \sum_{k=0}^n \frac{(n!)^2}{(k!)^2 ((n-k)!)^2},
+\begin{aligned}
+p_{0,0}^{(2n)}
+&= \frac{1}{4^{2n}} \sum_{k=0}^n \frac{(2n)!}{(k!)^2 ((n-k)!)^2} \\
+&= \frac{1}{4^{2n}} \binom{2n}{n} \sum_{k=0}^n \binom{n}{k}^2,
+\end{aligned}
 $$
 
 where the summation simplifies to $$\sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}$$ (a slick way of seeing this is true is to do the following: pick $$n$$ objects from $$2n$$ total objects; this can be done in $$\binom{2n}{n}$$ ways. Now split the $$2n$$ objects into two groups of $$n$$ each. We can pick the same $$n$$ objects by picking $$i$$ from the first group and $$n-i$$ from the second group and varying over $$i$$. Credits to this [post](https://math.stackexchange.com/questions/320348/inductive-proof-that-2n-choose-n-sumn-choose-i2) for this proof!). Continuing on, we get
@@ -180,7 +190,7 @@ $$
 which simplifies to $$\frac{1}{\sqrt{\pi n}}$$. That is to say, we have 
 
 $$
-p_{0,0}^{(2n)} \approx \frac{1}{n \pi} \implies \mathbb{E}[N_0 |X_0 = 0] = \sum_{n=1}^\infty \frac{1}{n\pi} = \infty,
+p_{0,0}^{(2n)} \approx \frac{1}{n \pi} \implies \mathbb{E}[N_0 \mid X_0 = 0] = \sum_{n=1}^\infty p_{0,0}^{(2n)} = \infty,
 $$
 
 and we conclude that the two-dimensional simple random walk is also recurrent, as we wanted.
@@ -198,5 +208,9 @@ _Theorem 2 (Lost drunk bees): The simple random walks on_ $$\mathbb{Z}^d$$_ for 
 
 The proof is left as an exercise to the reader (we had to write this out as an assignment!). Suffice to say, the argument is very similar to the ones used above, but requires a bit more number crunching due to the extra dimension!
 
-In the meantime, here is a bee: 
-![drawing2](/images/random_walk3d.png)
+In the meantime, here is a bee:
+
+<figure>
+  <img src="/images/random_walk3d.png" alt="A bee flying away from home along three-dimensional axes">
+  <figcaption>In three dimensions, a walk may never return home.</figcaption>
+</figure>

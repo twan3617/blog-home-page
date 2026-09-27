@@ -9,7 +9,7 @@ describe('article route', () => {
     const html = renderToStaticMarkup(await ArticlePage({ params }))
 
     expect(generateStaticParams()).toContainEqual({ slug: 'Borel-Cantelli' })
-    expect(metadata.title).toBe('Infinitely Recurring Events occur with Probability Zero')
+    expect(metadata.title).toBe('Borel–Cantelli: Finite Probability Sums Rule Out Infinite Recurrence')
     expect(metadata).toMatchObject({
       alternates: { canonical: '/writing/Borel-Cantelli' },
       openGraph: {
